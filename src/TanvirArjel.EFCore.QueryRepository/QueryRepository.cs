@@ -45,11 +45,11 @@ namespace TanvirArjel.EFCore.GenericRepository
             return GetListAsync<T>(false, cancellationToken);
         }
 
-        public Task<List<T>> GetListAsync<T>(bool asNoTracking, CancellationToken cancellationToken = default)
+        public Task<List<T>> GetListAsync<T>(bool asTracked, CancellationToken cancellationToken = default)
             where T : class
         {
             Func<IQueryable<T>, IIncludableQueryable<T, object>> nullValue = null;
-            return GetListAsync(nullValue, asNoTracking, cancellationToken);
+            return GetListAsync(nullValue, asTracked, cancellationToken);
         }
 
         public Task<List<T>> GetListAsync<T>(
@@ -62,7 +62,7 @@ namespace TanvirArjel.EFCore.GenericRepository
 
         public async Task<List<T>> GetListAsync<T>(
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
-            bool asNoTracking,
+            bool asTracked,
             CancellationToken cancellationToken = default)
             where T : class
         {
@@ -73,7 +73,7 @@ namespace TanvirArjel.EFCore.GenericRepository
                 query = includes(query);
             }
 
-            if (asNoTracking)
+            if (asTracked == false)
             {
                 query = query.AsNoTracking();
             }
@@ -91,17 +91,17 @@ namespace TanvirArjel.EFCore.GenericRepository
 
         public Task<List<T>> GetListAsync<T>(
             Expression<Func<T, bool>> condition,
-            bool asNoTracking,
+            bool asTracked,
             CancellationToken cancellationToken = default)
              where T : class
         {
-            return GetListAsync(condition, null, asNoTracking, cancellationToken);
+            return GetListAsync(condition, null, asTracked, cancellationToken);
         }
 
         public async Task<List<T>> GetListAsync<T>(
             Expression<Func<T, bool>> condition,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
-            bool asNoTracking,
+            bool asTracked,
             CancellationToken cancellationToken = default)
              where T : class
         {
@@ -117,7 +117,7 @@ namespace TanvirArjel.EFCore.GenericRepository
                 query = includes(query);
             }
 
-            if (asNoTracking)
+            if (asTracked == false)
             {
                 query = query.AsNoTracking();
             }
@@ -135,7 +135,7 @@ namespace TanvirArjel.EFCore.GenericRepository
 
         public async Task<List<T>> GetListAsync<T>(
             Specification<T> specification,
-            bool asNoTracking,
+            bool asTracked,
             CancellationToken cancellationToken = default)
            where T : class
         {
@@ -146,7 +146,7 @@ namespace TanvirArjel.EFCore.GenericRepository
                 query = query.GetSpecifiedQuery(specification);
             }
 
-            if (asNoTracking)
+            if (asTracked == false)
             {
                 query = query.AsNoTracking();
             }
@@ -218,6 +218,7 @@ namespace TanvirArjel.EFCore.GenericRepository
 
         public async Task<PaginatedList<T>> GetListAsync<T>(
             PaginationSpecification<T> specification,
+            bool asTracked = false,
             CancellationToken cancellationToken = default)
             where T : class
         {
@@ -229,6 +230,28 @@ namespace TanvirArjel.EFCore.GenericRepository
             PaginatedList<T> paginatedList = await _dbContext.Set<T>().ToPaginatedListAsync(specification, cancellationToken);
             return paginatedList;
         }
+
+        public async Task<PaginatedList<T>> GetListAsync<T>(
+           PaginationSpecification<T> specification,
+           bool asTracked,
+           CancellationToken cancellationToken = default)
+           where T : class
+        {
+            if (specification == null)
+            {
+                throw new ArgumentNullException(nameof(specification));
+            }
+
+            IQueryable<T> query = _dbContext.Set<T>();
+
+            if (asTracked == false)
+            {
+                query = query.AsNoTracking();
+            }
+
+            return await query.ToPaginatedListAsync(specification, cancellationToken); ;
+        }
+
 
         public async Task<PaginatedList<TProjectedType>> GetListAsync<T, TProjectedType>(
             PaginationSpecification<T> specification,
@@ -265,7 +288,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             return GetByIdAsync<T>(id, false, cancellationToken);
         }
 
-        public Task<T> GetByIdAsync<T>(object id, bool asNoTracking, CancellationToken cancellationToken = default)
+        public Task<T> GetByIdAsync<T>(object id, bool asTracked, CancellationToken cancellationToken = default)
             where T : class
         {
             if (id == null)
@@ -273,7 +296,7 @@ namespace TanvirArjel.EFCore.GenericRepository
                 throw new ArgumentNullException(nameof(id));
             }
 
-            return GetByIdAsync<T>(id, null, asNoTracking, cancellationToken);
+            return GetByIdAsync<T>(id, null, asTracked, cancellationToken);
         }
 
         public Task<T> GetByIdAsync<T>(
@@ -293,7 +316,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         public async Task<T> GetByIdAsync<T>(
             object id,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
-            bool asNoTracking = false,
+            bool asTracked = false,
             CancellationToken cancellationToken = default)
             where T : class
         {
@@ -336,7 +359,7 @@ namespace TanvirArjel.EFCore.GenericRepository
                 query = includes(query);
             }
 
-            if (asNoTracking)
+            if (!asTracked)
             {
                 query = query.AsNoTracking();
             }
@@ -406,11 +429,11 @@ namespace TanvirArjel.EFCore.GenericRepository
 
         public Task<T> GetAsync<T>(
             Expression<Func<T, bool>> condition,
-            bool asNoTracking,
+            bool asTracked,
             CancellationToken cancellationToken = default)
            where T : class
         {
-            return GetAsync(condition, null, asNoTracking, cancellationToken);
+            return GetAsync(condition, null, asTracked, cancellationToken);
         }
 
         public Task<T> GetAsync<T>(
@@ -425,7 +448,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         public async Task<T> GetAsync<T>(
             Expression<Func<T, bool>> condition,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
-            bool asNoTracking,
+            bool asTracked,
             CancellationToken cancellationToken = default)
            where T : class
         {
@@ -441,7 +464,7 @@ namespace TanvirArjel.EFCore.GenericRepository
                 query = includes(query);
             }
 
-            if (asNoTracking)
+            if (asTracked == false)
             {
                 query = query.AsNoTracking();
             }
@@ -455,7 +478,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             return GetAsync(specification, false, cancellationToken);
         }
 
-        public async Task<T> GetAsync<T>(Specification<T> specification, bool asNoTracking, CancellationToken cancellationToken = default)
+        public async Task<T> GetAsync<T>(Specification<T> specification, bool asTracked, CancellationToken cancellationToken = default)
             where T : class
         {
             IQueryable<T> query = _dbContext.Set<T>();
@@ -465,7 +488,7 @@ namespace TanvirArjel.EFCore.GenericRepository
                 query = query.GetSpecifiedQuery(specification);
             }
 
-            if (asNoTracking)
+            if (asTracked == false)
             {
                 query = query.AsNoTracking();
             }

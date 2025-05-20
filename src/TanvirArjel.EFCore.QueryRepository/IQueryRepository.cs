@@ -41,12 +41,12 @@ namespace TanvirArjel.EFCore.GenericRepository
         /// This method returns <see cref="List{T}"/> without any filter. Call only when you want to pull all the data from the source.
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
-        /// <param name="asNoTracking">A <see cref="bool"/> value which determines whether the return entity will be tracked by
-        /// EF Core context or not. Default value is false i.e tracking is enabled by default.
+        /// <param name="asTracked">A <see cref="bool"/> value which determines whether the return entity will be tracked by
+        /// EF Core context or not. Default value is false i.e tracking is disabled by default.
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/> of <see cref="List{T}"/>.</returns>
-        Task<List<TEntity>> GetListAsync<TEntity>(bool asNoTracking, CancellationToken cancellationToken = default)
+        Task<List<TEntity>> GetListAsync<TEntity>(bool asTracked, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -66,14 +66,14 @@ namespace TanvirArjel.EFCore.GenericRepository
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="includes">Navigation properties to be loaded.</param>
-        /// <param name="asNoTracking">A <see cref="bool"/> value which determines whether the return entity will be tracked by
-        /// EF Core context or not. Default value is false i.e tracking is enabled by default.
+        /// <param name="asTracked">A <see cref="bool"/> value which determines whether the return entity will be tracked by
+        /// EF Core context or not. Default value is false i.e tracking is disabled by default.
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/> of <see cref="List{T}"/>.</returns>
         Task<List<TEntity>> GetListAsync<TEntity>(
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
-            bool asNoTracking,
+            bool asTracked,
             CancellationToken cancellationToken = default)
             where TEntity : class;
 
@@ -92,14 +92,14 @@ namespace TanvirArjel.EFCore.GenericRepository
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="condition">The condition on which entity list will be returned.</param>
-        /// <param name="asNoTracking">A <see cref="bool"/> value which determines whether the return entity will be tracked by
-        /// EF Core context or not. Default value is false i.e tracking is enabled by default.
+        /// <param name="asTracked">A <see cref="bool"/> value which determines whether the return entity will be tracked by
+        /// EF Core context or not. Default value is false i.e tracking is disabled by default.
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="List{TEntity}"/>.</returns>
         Task<List<TEntity>> GetListAsync<TEntity>(
             Expression<Func<TEntity, bool>> condition,
-            bool asNoTracking,
+            bool asTracked,
             CancellationToken cancellationToken = default)
             where TEntity : class;
 
@@ -109,15 +109,15 @@ namespace TanvirArjel.EFCore.GenericRepository
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="condition">The condition on which entity list will be returned.</param>
         /// <param name="includes">Navigation properties to be loaded.</param>
-        /// <param name="asNoTracking">A <see cref="bool"/> value which determines whether the return entity will be tracked by
-        /// EF Core context or not. Default value is false i.e tracking is enabled by default.
+        /// <param name="asTracked">A <see cref="bool"/> value which determines whether the return entity will be tracked by
+        /// EF Core context or not. Default value is false i.e tracking is disabled by default.
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="List{TEntity}"/>.</returns>
         Task<List<TEntity>> GetListAsync<TEntity>(
             Expression<Func<TEntity, bool>> condition,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
-            bool asNoTracking = false,
+            bool asTracked = false,
             CancellationToken cancellationToken = default)
             where TEntity : class;
 
@@ -140,14 +140,14 @@ namespace TanvirArjel.EFCore.GenericRepository
         /// <param name="specification">A <see cref="Specification{TEntity}"/> <see cref="object"/> which contains all the conditions and criteria
         /// on which data will be returned.
         /// </param>
-        /// <param name="asNoTracking">A <see cref="bool"/> value which determines whether the return entity will be tracked by
-        /// EF Core context or not. Default value is false i.e tracking is enabled by default.
+        /// <param name="asTracked">A <see cref="bool"/> value which determines whether the return entity will be tracked by
+        /// EF Core context or not. Default value is false i.e tracking is disabled by default.
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="List{TEntity}"/>.</returns>
         Task<List<TEntity>> GetListAsync<TEntity>(
             Specification<TEntity> specification,
-            bool asNoTracking,
+            bool asTracked,
             CancellationToken cancellationToken = default)
             where TEntity : class;
 
@@ -230,6 +230,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             where TEntity : class
             where TProjectedType : class;
 
+
         /// <summary>
         /// This method takes <paramref name="id"/> which is the primary key value of the entity and returns the entity
         /// if found otherwise <see langword="null"/>.
@@ -247,12 +248,12 @@ namespace TanvirArjel.EFCore.GenericRepository
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="id">The primary key value of the entity.</param>
-        /// <param name="asNoTracking">A <see cref="bool"/> value which determines whether the return entity will be tracked by
-        /// EF Core context or not. Default value is false i.e tracking is enabled by default.
+        /// <param name="asTracked">A <see cref="bool"/> value which determines whether the return entity will be tracked by
+        /// EF Core context or not. Default value is false i.e tracking is disabled by default.
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
-        Task<TEntity> GetByIdAsync<TEntity>(object id, bool asNoTracking, CancellationToken cancellationToken = default)
+        Task<TEntity> GetByIdAsync<TEntity>(object id, bool asTracked, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -277,15 +278,15 @@ namespace TanvirArjel.EFCore.GenericRepository
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="id">The primary key value of the entity.</param>
         /// <param name="includes">The navigation properties to be loaded.</param>
-        /// <param name="asNoTracking">A <see cref="bool"/> value which determines whether the return entity will be tracked by
-        /// EF Core context or not. Default value is false i.e tracking is enabled by default.
+        /// <param name="asTracked">A <see cref="bool"/> value which determines whether the return entity will be tracked by
+        /// EF Core context or not. Default value is false i.e tracking is disabled by default.
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
         Task<TEntity> GetByIdAsync<TEntity>(
             object id,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
-            bool asNoTracking,
+            bool asTracked,
             CancellationToken cancellationToken = default)
             where TEntity : class;
 
@@ -321,14 +322,14 @@ namespace TanvirArjel.EFCore.GenericRepository
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="condition">The condition on which entity will be returned.</param>
-        /// <param name="asNoTracking">A <see cref="bool"/> value which determines whether the return entity will be tracked by
-        /// EF Core context or not. Default value is false i.e tracking is enabled by default.
+        /// <param name="asTracked">A <see cref="bool"/> value which determines whether the return entity will be tracked by
+        /// EF Core context or not. Default value is false i.e tracking is disabled by default.
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <typeparamref name="TEntity"/>.</returns>
         Task<TEntity> GetAsync<TEntity>(
             Expression<Func<TEntity, bool>> condition,
-            bool asNoTracking,
+            bool asTracked,
             CancellationToken cancellationToken = default)
             where TEntity : class;
 
@@ -352,15 +353,15 @@ namespace TanvirArjel.EFCore.GenericRepository
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="condition">The condition on which entity will be returned.</param>
         /// <param name="includes">Navigation properties to be loaded.</param>
-        /// <param name="asNoTracking">A <see cref="bool"/> value which determines whether the return entity will be tracked by
-        /// EF Core context or not. Default value is false i.e tracking is enabled by default.
+        /// <param name="asTracked">A <see cref="bool"/> value which determines whether the return entity will be tracked by
+        /// EF Core context or not. Default value is false i.e tracking is disabled by default.
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <typeparamref name="TEntity"/>.</returns>
         Task<TEntity> GetAsync<TEntity>(
             Expression<Func<TEntity, bool>> condition,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
-            bool asNoTracking,
+            bool asTracked,
             CancellationToken cancellationToken = default)
             where TEntity : class;
 
@@ -383,14 +384,14 @@ namespace TanvirArjel.EFCore.GenericRepository
         /// <param name="specification">A <see cref="Specification{TEntity}"/> object which contains all the conditions and criteria
         /// on which data will be returned.
         /// </param>
-        /// <param name="asNoTracking">A <see cref="bool"/> value which determines whether the return entity will be tracked by
-        /// EF Core context or not. Default value is false i.e tracking is enabled by default.
+        /// <param name="asTracked">A <see cref="bool"/> value which determines whether the return entity will be tracked by
+        /// EF Core context or not. Default value is false i.e tracking is disabled by default.
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
         Task<TEntity> GetAsync<TEntity>(
             Specification<TEntity> specification,
-            bool asNoTracking,
+            bool asTracked,
             CancellationToken cancellationToken = default)
             where TEntity : class;
 
