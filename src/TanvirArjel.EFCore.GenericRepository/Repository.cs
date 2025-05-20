@@ -291,7 +291,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             return count;
         }
 
-#if NET7_0_OR_GREATER
+
         public async Task<int> ExecuteUpdateAsync<TEntity>(
                     Expression<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>> setPropertyCalls,
                     CancellationToken cancellationToken = default)
@@ -326,6 +326,5 @@ namespace TanvirArjel.EFCore.GenericRepository
             int count = await _dbContext.Set<TEntity>().Where(condition).ExecuteDeleteAsync(cancellationToken);
             return count;
         }
-#endif
     }
 }
