@@ -93,8 +93,10 @@ namespace TanvirArjel.EFCore.GenericRepository
             {
                 query = specification.StateFilter switch
                 {
-                    StateFilter.Active => query.Where(e => !((IArchivableEntity)e).IsArchived),
-                    StateFilter.Archived => query.Where(e => ((IArchivableEntity)e).IsArchived),
+                    StateFilter.Active =>
+                        query.Where(BuildIsArchivedPredicate<T>(false)),
+                    StateFilter.Archived =>
+                        query.Where(BuildIsArchivedPredicate<T>(true)),
                     _ => query,
                 };
             }
@@ -127,5 +129,15 @@ namespace TanvirArjel.EFCore.GenericRepository
 
             return query;
         }
+
+        private static Expression<Func<T, bool>> BuildIsArchivedPredicate<T>(bool isArchived)
+        {
+            var parameter = Expression.Parameter(typeof(T), "e");
+            var isArchivedProperty = Expression.Property(parameter, nameof(IArchivableEntity.IsArchived));
+            var condition = Expression.Equal(isArchivedProperty, Expression.Constant(isArchived));
+            return Expression.Lambda<Func<T, bool>>(condition, parameter);
+        }
     }
+
+
 }

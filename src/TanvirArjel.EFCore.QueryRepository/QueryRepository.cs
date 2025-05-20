@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
+using TanvirArjel.EFCore.GenericRepository.Entities;
 
 [assembly: InternalsVisibleTo("TanvirArjel.EFCore.GenericRepository")]
 [assembly: InternalsVisibleTo("EFCore.QueryRepository.Tests")]
@@ -34,19 +35,19 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public IQueryable<T> GetQueryable<T>()
-            where T : class
+            where T : IEntity
         {
             return _dbContext.Set<T>();
         }
 
         public Task<List<T>> GetListAsync<T>(CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             return GetListAsync<T>(false, cancellationToken);
         }
 
         public Task<List<T>> GetListAsync<T>(bool asTracked, CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             Func<IQueryable<T>, IIncludableQueryable<T, object>> nullValue = null;
             return GetListAsync(nullValue, asTracked, cancellationToken);
@@ -55,7 +56,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         public Task<List<T>> GetListAsync<T>(
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             return GetListAsync(includes, false, cancellationToken);
         }
@@ -64,7 +65,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             bool asTracked,
             CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -84,7 +85,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public Task<List<T>> GetListAsync<T>(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
-             where T : class
+             where T : IEntity
         {
             return GetListAsync(condition, false, cancellationToken);
         }
@@ -93,7 +94,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             Expression<Func<T, bool>> condition,
             bool asTracked,
             CancellationToken cancellationToken = default)
-             where T : class
+             where T : IEntity
         {
             return GetListAsync(condition, null, asTracked, cancellationToken);
         }
@@ -103,7 +104,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             bool asTracked,
             CancellationToken cancellationToken = default)
-             where T : class
+             where T : IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -128,7 +129,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public Task<List<T>> GetListAsync<T>(Specification<T> specification, CancellationToken cancellationToken = default)
-           where T : class
+           where T : IEntity
         {
             return GetListAsync(specification, false, cancellationToken);
         }
@@ -137,7 +138,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             Specification<T> specification,
             bool asTracked,
             CancellationToken cancellationToken = default)
-           where T : class
+           where T : IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -157,7 +158,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         public async Task<List<TProjectedType>> GetListAsync<T, TProjectedType>(
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             if (selectExpression == null)
             {
@@ -174,7 +175,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             Expression<Func<T, bool>> condition,
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             if (selectExpression == null)
             {
@@ -198,7 +199,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             Specification<T> specification,
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             if (selectExpression == null)
             {
@@ -219,7 +220,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         public Task<PaginatedList<T>> GetListAsync<T>(
                    PaginationSpecification<T> specification,
                    CancellationToken cancellationToken = default)
-                   where T : class
+                   where T : IEntity
         {
             return GetListAsync(specification, false, cancellationToken);
         }
@@ -228,7 +229,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             PaginationSpecification<T> specification,
             bool asTracked,
             CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             if (specification == null)
             {
@@ -249,7 +250,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             PaginationSpecification<T> specification,
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
             where TProjectedType : class
         {
             if (specification == null)
@@ -270,7 +271,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public Task<T> GetByIdAsync<T>(object id, CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             if (id == null)
             {
@@ -281,7 +282,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public Task<T> GetByIdAsync<T>(object id, bool asTracked, CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             if (id == null)
             {
@@ -295,7 +296,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             object id,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             if (id == null)
             {
@@ -310,7 +311,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             bool asTracked = false,
             CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             if (id == null)
             {
@@ -364,7 +365,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             object id,
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             if (id == null)
             {
@@ -414,7 +415,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         public Task<T> GetAsync<T>(
             Expression<Func<T, bool>> condition,
             CancellationToken cancellationToken = default)
-           where T : class
+           where T : IEntity
         {
             return GetAsync(condition, null, false, cancellationToken);
         }
@@ -423,7 +424,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             Expression<Func<T, bool>> condition,
             bool asTracked,
             CancellationToken cancellationToken = default)
-           where T : class
+           where T : IEntity
         {
             return GetAsync(condition, null, asTracked, cancellationToken);
         }
@@ -432,7 +433,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             Expression<Func<T, bool>> condition,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             CancellationToken cancellationToken = default)
-           where T : class
+           where T : IEntity
         {
             return GetAsync(condition, includes, false, cancellationToken);
         }
@@ -442,7 +443,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             bool asTracked,
             CancellationToken cancellationToken = default)
-           where T : class
+           where T : IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -465,13 +466,13 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public Task<T> GetAsync<T>(Specification<T> specification, CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             return GetAsync(specification, false, cancellationToken);
         }
 
         public async Task<T> GetAsync<T>(Specification<T> specification, bool asTracked, CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -492,7 +493,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             Expression<Func<T, bool>> condition,
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             if (selectExpression == null)
             {
@@ -513,7 +514,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             Specification<T> specification,
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             if (selectExpression == null)
             {
@@ -531,13 +532,13 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public Task<bool> ExistsAsync<T>(CancellationToken cancellationToken = default)
-           where T : class
+           where T : IEntity
         {
             return ExistsAsync<T>(null, cancellationToken);
         }
 
         public async Task<bool> ExistsAsync<T>(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
-           where T : class
+           where T : IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -551,7 +552,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public async Task<bool> ExistsByIdAsync<T>(object id, CancellationToken cancellationToken = default)
-           where T : class
+           where T : IEntity
         {
             if (id == null)
             {
@@ -592,14 +593,14 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public async Task<int> GetCountAsync<T>(CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             int count = await _dbContext.Set<T>().CountAsync(cancellationToken).ConfigureAwait(false);
             return count;
         }
 
         public async Task<int> GetCountAsync<T>(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -612,7 +613,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public async Task<int> GetCountAsync<T>(IEnumerable<Expression<Func<T, bool>>> conditions, CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -628,14 +629,14 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public async Task<long> GetLongCountAsync<T>(CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             long count = await _dbContext.Set<T>().LongCountAsync(cancellationToken).ConfigureAwait(false);
             return count;
         }
 
         public async Task<long> GetLongCountAsync<T>(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -648,7 +649,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public async Task<long> GetLongCountAsync<T>(IEnumerable<Expression<Func<T, bool>>> conditions, CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 

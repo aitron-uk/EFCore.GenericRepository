@@ -2,7 +2,7 @@ using System;
 
 namespace TanvirArjel.EFCore.GenericRepository.Entities;
 
-public interface IEntity
+public abstract class IEntity
 {
     Guid Id { get; }
 

@@ -1,6 +1,6 @@
 ﻿namespace TanvirArjel.EFCore.GenericRepository.Entities;
 
-public interface IArchivableEntity: IEntity
+public abstract class IArchivableEntity: IEntity
 {
     public bool IsArchived { get; set; }
 }

@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using TanvirArjel.EFCore.GenericRepository.Entities;
 
 namespace TanvirArjel.EFCore.GenericRepository
 {
@@ -75,7 +76,7 @@ namespace TanvirArjel.EFCore.GenericRepository
             this IQueryable<T> source,
             PaginationSpecification<T> specification,
             CancellationToken cancellationToken = default)
-            where T : class
+            where T : IEntity
         {
             if (source == null)
             {
