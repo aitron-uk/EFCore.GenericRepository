@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net8.0</TargetFrameworks>
 		<Version>1.5.3</Version>
-		<LangVersion>8.0</LangVersion>
+		<LangVersion>Latest</LangVersion>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<!-- <GeneratePackageOnBuild>true</GeneratePackageOnBuild> -->
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>

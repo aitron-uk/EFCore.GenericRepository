@@ -3,6 +3,7 @@
 // </copyright>
 
 using Microsoft.EntityFrameworkCore;
+using TanvirArjel.EFCore.GenericRepository.Entities;
 
 namespace TanvirArjel.EFCore.GenericRepository
 {
@@ -11,7 +12,7 @@ namespace TanvirArjel.EFCore.GenericRepository
     /// </summary>
     /// <typeparam name="T">The database entity i.e an <see cref="DbSet{TEntity}"/> object.</typeparam>
     public class PaginationSpecification<T> : SpecificationBase<T>
-        where T : class
+        where T : IEntity
     {
         /// <summary>
         /// Gets or sets the current page index.

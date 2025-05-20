@@ -6,13 +6,14 @@ using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
+using TanvirArjel.EFCore.GenericRepository.Entities;
 
 namespace TanvirArjel.EFCore.GenericRepository
 {
     internal static class SpecificationEvaluator
     {
         public static IQueryable<T> GetSpecifiedQuery<T>(this IQueryable<T> inputQuery, Specification<T> specification)
-            where T : class
+            where T : IEntity
         {
             IQueryable<T> query = GetSpecifiedQuery(inputQuery, (SpecificationBase<T>)specification);
 
@@ -41,7 +42,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public static IQueryable<T> GetSpecifiedQuery<T>(this IQueryable<T> inputQuery, PaginationSpecification<T> specification)
-            where T : class
+            where T : IEntity
         {
             if (inputQuery == null)
             {
@@ -74,7 +75,7 @@ namespace TanvirArjel.EFCore.GenericRepository
         }
 
         public static IQueryable<T> GetSpecifiedQuery<T>(this IQueryable<T> inputQuery, SpecificationBase<T> specification)
-            where T : class
+            where T : IEntity
         {
             if (inputQuery == null)
             {
@@ -88,6 +89,16 @@ namespace TanvirArjel.EFCore.GenericRepository
 
             IQueryable<T> query = inputQuery;
 
+            if (typeof(IArchivableEntity).IsAssignableFrom(typeof(T)))
+            {
+                query = specification.StateFilter switch
+                {
+                    StateFilter.Active => query.Where(e => !((IArchivableEntity)e).IsArchived),
+                    StateFilter.Archived => query.Where(e => ((IArchivableEntity)e).IsArchived),
+                    _ => query,
+                };
+            }
+
             // modify the IQueryable using the specification's criteria expression
             if (specification.Conditions != null && specification.Conditions.Count != 0)
             {
@@ -96,6 +107,7 @@ namespace TanvirArjel.EFCore.GenericRepository
                     query = query.Where(specificationCondition);
                 }
             }
+
 
             // Includes all expression-based includes
             if (specification.Includes != null)

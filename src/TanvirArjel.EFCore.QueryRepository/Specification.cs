@@ -2,6 +2,8 @@
 // Copyright (c) TanvirArjel. All rights reserved.
 // </copyright>
 
+using TanvirArjel.EFCore.GenericRepository.Entities;
+
 namespace TanvirArjel.EFCore.GenericRepository
 {
     /// <summary>
@@ -9,7 +11,7 @@ namespace TanvirArjel.EFCore.GenericRepository
     /// </summary>
     /// <typeparam name="T">The database entity.</typeparam>
     public class Specification<T> : SpecificationBase<T>
-        where T : class
+        where T : IEntity
     {
         /// <summary>
         /// Gets or sets the value of number of item you want to skip in the query.

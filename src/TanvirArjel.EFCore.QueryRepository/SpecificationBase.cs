@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Query;
+using TanvirArjel.EFCore.GenericRepository.Entities;
 
 namespace TanvirArjel.EFCore.GenericRepository
 {
@@ -15,7 +16,7 @@ namespace TanvirArjel.EFCore.GenericRepository
     /// </summary>
     /// <typeparam name="T">The database entity.</typeparam>
     public class SpecificationBase<T>
-        where T : class
+        where T : IEntity
     {
         /// <summary>
         /// Gets or sets the <see cref="Expression{TDelegate}"/> list you want to pass with your EF Core query.
@@ -36,5 +37,11 @@ namespace TanvirArjel.EFCore.GenericRepository
         /// Gets or sets dynamic order by option in string format.
         /// </summary>
         public (string ColumnName, string SortDirection) OrderByDynamic { get; set; }
+
+
+        /// <summary>
+        /// Gets or sets StateFilter option.
+        /// </summary>
+        public StateFilter StateFilter { get; set; } = StateFilter.Active;
     }
 }
