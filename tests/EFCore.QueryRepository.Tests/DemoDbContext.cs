@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TanvirArjel.EFCore.GenericRepository.Entities;
 
 namespace EFCore.QueryRepository.Tests;
 
@@ -26,7 +27,7 @@ public class DemoDbContext : DbContext
     public virtual DbSet<Employee> Employees { get; set; }
 }
 
-public class Employee
+public class Employee : IEntity
 {
     public int Id { get; set; }
 

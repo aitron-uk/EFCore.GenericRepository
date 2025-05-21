@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TanvirArjel.EFCore.GenericRepository.Entities;
 
 namespace AspNetCoreApp.Data.Models;
 
-public class Employee
+public class Employee : IArchivableEntity
 {
     [Key]
     public long EmployeeId { get; set; }
