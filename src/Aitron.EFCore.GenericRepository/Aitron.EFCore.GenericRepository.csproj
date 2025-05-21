@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net8.0</TargetFrameworks>
-		<Version>6.0.4</Version>
+		<Version>8.0.0</Version>
 		<LangVersion>Latest</LangVersion>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<!-- <GeneratePackageOnBuild>true</GeneratePackageOnBuild> -->
@@ -15,7 +15,7 @@
 
 			This library includes the following notable features:
 
-			1. This library can be run on any .NET Core or .NET application which has .NET Core 3.1, .NET Standard 2.1 and .NET 5.0+ support.
+			1. This library can be run on any .NET Core or .NET application which has .NET 8.0+ support.
 
 			2. It’s providing the Generic Repository with database transaction support.
 
@@ -77,19 +77,6 @@
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.*" />
 	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.*" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.*" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.*" />
-	</ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">
 			<PrivateAssets>all</PrivateAssets>
