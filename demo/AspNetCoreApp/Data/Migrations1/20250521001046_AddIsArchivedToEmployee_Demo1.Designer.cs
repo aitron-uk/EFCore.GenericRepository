@@ -3,16 +3,19 @@ using AspNetCoreApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AspNetCore5._0.Data.Migrations2
+namespace AspNetCore5._0.Data.Migrations1
 {
-    [DbContext(typeof(Demo2DbContext))]
-    partial class Demo2DbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(Demo1DbContext))]
+    [Migration("20250521001046_AddIsArchivedToEmployee_Demo1")]
+    partial class AddIsArchivedToEmployee_Demo1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

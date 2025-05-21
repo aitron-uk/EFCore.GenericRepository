@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace AspNetCore5._0.Data.Migrations1
 {
     [DbContext(typeof(Demo1DbContext))]
@@ -14,16 +16,18 @@ namespace AspNetCore5._0.Data.Migrations1
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.17")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "8.0.16")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            modelBuilder.Entity("AspNetCore5._0.Data.Models.Department", b =>
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AspNetCoreApp.Data.Models.Department", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -33,12 +37,13 @@ namespace AspNetCore5._0.Data.Migrations1
                     b.ToTable("Department");
                 });
 
-            modelBuilder.Entity("AspNetCore5._0.Data.Models.Employee", b =>
+            modelBuilder.Entity("AspNetCoreApp.Data.Models.Employee", b =>
                 {
                     b.Property<long>("EmployeeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("EmployeeId"));
 
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
@@ -51,6 +56,9 @@ namespace AspNetCore5._0.Data.Migrations1
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.HasKey("EmployeeId");
 
                     b.HasIndex("DepartmentId");
@@ -58,7 +66,7 @@ namespace AspNetCore5._0.Data.Migrations1
                     b.ToTable("Employee");
                 });
 
-            modelBuilder.Entity("AspNetCore5._0.Data.Models.EmployeeHistory", b =>
+            modelBuilder.Entity("AspNetCoreApp.Data.Models.EmployeeHistory", b =>
                 {
                     b.Property<long>("EmployeeId")
                         .HasColumnType("bigint");
@@ -75,9 +83,9 @@ namespace AspNetCore5._0.Data.Migrations1
                     b.ToTable("EmployeeHistories");
                 });
 
-            modelBuilder.Entity("AspNetCore5._0.Data.Models.Employee", b =>
+            modelBuilder.Entity("AspNetCoreApp.Data.Models.Employee", b =>
                 {
-                    b.HasOne("AspNetCore5._0.Data.Models.Department", "Department")
+                    b.HasOne("AspNetCoreApp.Data.Models.Department", "Department")
                         .WithMany("Employees")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -86,7 +94,7 @@ namespace AspNetCore5._0.Data.Migrations1
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("AspNetCore5._0.Data.Models.Department", b =>
+            modelBuilder.Entity("AspNetCoreApp.Data.Models.Department", b =>
                 {
                     b.Navigation("Employees");
                 });
