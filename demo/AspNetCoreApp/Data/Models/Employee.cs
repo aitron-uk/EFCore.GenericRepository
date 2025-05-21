@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TanvirArjel.EFCore.GenericRepository.Entities;
+using Aitron.EFCore.GenericRepository.Entities;
 
 namespace AspNetCoreApp.Data.Models;
 

@@ -1,5 +1,5 @@
-﻿// <copyright file="Repository.cs" company="TanvirArjel">
-// Copyright (c) TanvirArjel. All rights reserved.
+﻿// <copyright file="Repository.cs" company="Aitron">
+// Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
 using System;
@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace TanvirArjel.EFCore.GenericRepository
+namespace Aitron.EFCore.GenericRepository
 {
     [DebuggerStepThrough]
     internal sealed class Repository<TDbContext> : QueryRepository<TDbContext>, IRepository, IRepository<TDbContext>

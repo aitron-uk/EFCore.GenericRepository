@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TanvirArjel.EFCore.GenericRepository.Entities;
+using Aitron.EFCore.GenericRepository.Entities;
 
 namespace EFCore.QueryRepository.Tests;
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TanvirArjel.EFCore.GenericRepository;
+using Aitron.EFCore.GenericRepository;
 
 namespace AspNetCoreApp;
 

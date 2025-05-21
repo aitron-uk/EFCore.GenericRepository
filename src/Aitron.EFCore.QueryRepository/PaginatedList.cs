@@ -1,11 +1,11 @@
-﻿// <copyright file="PaginatedList.cs" company="TanvirArjel">
-// Copyright (c) TanvirArjel. All rights reserved.
+﻿// <copyright file="PaginatedList.cs" company="Aitron">
+// Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
 using System;
 using System.Collections.Generic;
 
-namespace TanvirArjel.EFCore.GenericRepository
+namespace Aitron.EFCore.GenericRepository
 {
     /// <summary>
     /// The object contains pagination info and items.

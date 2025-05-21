@@ -16,9 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreApp", "demo\AspNe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "demo\UnitTest\UnitTest.csproj", "{375C3AF5-6957-46D1-92F4-869C7E26DE5F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TanvirArjel.EFCore.GenericRepository", "src\TanvirArjel.EFCore.GenericRepository\TanvirArjel.EFCore.GenericRepository.csproj", "{2D4EDBB7-8A7D-4348-881F-F670773401FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aitron.EFCore.GenericRepository", "src\Aitron.EFCore.GenericRepository\Aitron.EFCore.GenericRepository.csproj", "{2D4EDBB7-8A7D-4348-881F-F670773401FA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TanvirArjel.EFCore.QueryRepository", "src\TanvirArjel.EFCore.QueryRepository\TanvirArjel.EFCore.QueryRepository.csproj", "{B27024B0-3436-4E8B-9E6C-0D3C6850EE95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aitron.EFCore.QueryRepository", "src\Aitron.EFCore.QueryRepository\Aitron.EFCore.QueryRepository.csproj", "{B27024B0-3436-4E8B-9E6C-0D3C6850EE95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4704B96B-B9B8-4278-8581-15A16F254EA0}"
 EndProject

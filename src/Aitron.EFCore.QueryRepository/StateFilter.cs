@@ -1,8 +1,8 @@
-﻿// <copyright file="StateFilter.cs" company="TanvirArjel">
-// Copyright (c) TanvirArjel. All rights reserved.
+﻿// <copyright file="StateFilter.cs" company="Aitron">
+// Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
-namespace TanvirArjel.EFCore.GenericRepository
+namespace Aitron.EFCore.GenericRepository
 {
     /// <summary>
     /// Enum to set record state.

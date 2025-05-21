@@ -1,12 +1,12 @@
-﻿// <copyright file="ServiceCollectionExtensions.cs" company="TanvirArjel">
-// Copyright (c) TanvirArjel. All rights reserved.
+﻿// <copyright file="ServiceCollectionExtensions.cs" company="Aitron">
+// Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace TanvirArjel.EFCore.GenericRepository
+namespace Aitron.EFCore.GenericRepository
 {
     /// <summary>
     /// Contain all the service collection extension methods.
@@ -14,14 +14,14 @@ namespace TanvirArjel.EFCore.GenericRepository
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Add generic repository services to the .NET Dependency Injection container.
+        /// Add generic query repository services to the .NET Dependency Injection container.
         /// </summary>
         /// <typeparam name="TDbContext">Your EF Core <see cref="DbContext"/>.</typeparam>
         /// <param name="services">The type to be extended.</param>
         /// <param name="lifetime">The life time of the service.</param>
         /// <returns>Returns <see cref="IServiceCollection"/>.</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="services"/> is <see langword="null"/>.</exception>
-        public static IServiceCollection AddGenericRepository<TDbContext>(
+        public static IServiceCollection AddQueryRepository<TDbContext>(
             this IServiceCollection services,
             ServiceLifetime lifetime = ServiceLifetime.Scoped)
             where TDbContext : DbContext
@@ -32,22 +32,24 @@ namespace TanvirArjel.EFCore.GenericRepository
             }
 
             services.Add(new ServiceDescriptor(
-                typeof(IRepository),
+                typeof(IQueryRepository),
                 serviceProvider =>
                 {
                     TDbContext dbContext = ActivatorUtilities.CreateInstance<TDbContext>(serviceProvider);
-                    return new Repository<TDbContext>(dbContext);
+                    dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+                    return new QueryRepository<TDbContext>(dbContext);
                 },
                 lifetime));
 
             services.Add(new ServiceDescriptor(
-               typeof(IRepository<TDbContext>),
-               serviceProvider =>
-               {
-                   TDbContext dbContext = ActivatorUtilities.CreateInstance<TDbContext>(serviceProvider);
-                   return new Repository<TDbContext>(dbContext);
-               },
-               lifetime));
+                typeof(IQueryRepository<TDbContext>),
+                serviceProvider =>
+                {
+                    TDbContext dbContext = ActivatorUtilities.CreateInstance<TDbContext>(serviceProvider);
+                    dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+                    return new QueryRepository<TDbContext>(dbContext);
+                },
+                lifetime));
 
             return services;
         }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AspNetCoreApp.Data.Models;
 using AspNetCoreApp.Dtos;
 using Microsoft.EntityFrameworkCore;
-using TanvirArjel.EFCore.GenericRepository;
+using Aitron.EFCore.GenericRepository;
 using TanvirArjel.Extensions.Microsoft.DependencyInjection;
 
 namespace AspNetCoreApp.Services;
@@ -22,7 +22,7 @@ public class EmployeeService
     public async Task<List<EmployeeDto>> GetPaginatedListAsync()
     {
         Specification<Employee> specification = new Specification<Employee>();
-        specification.Conditions.Add(e => e.EmployeeName.Contains("Ta"));
+        specification.Conditions.Add(e => e.EmployeeName.Contains("Ai"));
         specification.Includes = q => q.Include(e => e.Department);
         specification.OrderBy = q => q.OrderBy(e => e.EmployeeName);
         specification.Skip = 0;

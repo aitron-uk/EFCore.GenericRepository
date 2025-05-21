@@ -8,8 +8,8 @@
 		<!-- <GeneratePackageOnBuild>true</GeneratePackageOnBuild> -->
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
 		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
-		<AssemblyName>TanvirArjel.EFCore.QueryRepository</AssemblyName>
-		<RootNamespace>TanvirArjel.EFCore.GenericRepository</RootNamespace>
+		<AssemblyName>Aitron.EFCore.QueryRepository</AssemblyName>
+		<RootNamespace>Aitron.EFCore.GenericRepository</RootNamespace>
 		<Description>
 			This library is a Generic Query Repository implementation for EF Core ORM which will remove developers' pain to write query repository layer for each .NET Core and .NET project.
 
@@ -34,9 +34,9 @@
 			9. Free raw SQL query support both for complex type and primitive types.
 		</Description>
 		<Title>EF Core Query Repository</Title>
-		<Copyright>©2021 TanvirArjel. All rights reserved.</Copyright>
-		<PackageProjectUrl>https://github.com/TanvirArjel/EFCore.GenericRepository</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/TanvirArjel/EFCore.GenericRepository</RepositoryUrl>
+		<Copyright>©2021 Aitron. All rights reserved.</Copyright>
+		<PackageProjectUrl>https://github.com/aitron-uk/EFCore.GenericRepository</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/aitron-uk/EFCore.GenericRepository</RepositoryUrl>
 		<RepositoryType>Git</RepositoryType>
 		<PackageTags>EFCore, RepositoryLayer, GenericRepository, QueryRepository, .NET, .NETCore, ASP.NETCore</PackageTags>
 		<PackageReleaseNotes>
@@ -44,7 +44,7 @@
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageIcon>icon.png</PackageIcon>
-		<Authors>TanvirArjel</Authors>
+		<Authors>Aitron</Authors>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>

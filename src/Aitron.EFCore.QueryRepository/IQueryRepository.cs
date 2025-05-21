@@ -1,5 +1,5 @@
-﻿// <copyright file="IQueryRepository.cs" company="TanvirArjel">
-// Copyright (c) TanvirArjel. All rights reserved.
+﻿// <copyright file="IQueryRepository.cs" company="Aitron">
+// Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
 using System;
@@ -11,9 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using TanvirArjel.EFCore.GenericRepository.Entities;
+using Aitron.EFCore.GenericRepository.Entities;
 
-namespace TanvirArjel.EFCore.GenericRepository
+namespace Aitron.EFCore.GenericRepository
 {
     /// <summary>
     /// Contains all the query methods. If you register the multiple DbContexts, it will use the last one.

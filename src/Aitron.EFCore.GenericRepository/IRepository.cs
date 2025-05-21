@@ -1,5 +1,5 @@
-﻿// <copyright file="IRepository.cs" company="TanvirArjel">
-// Copyright (c) TanvirArjel. All rights reserved.
+﻿// <copyright file="IRepository.cs" company="Aitron">
+// Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
 using System;
@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace TanvirArjel.EFCore.GenericRepository
+namespace Aitron.EFCore.GenericRepository
 {
     /// <summary>
     /// Contains all the repository methods. If you register the multiple DbContexts, it will use the last one.

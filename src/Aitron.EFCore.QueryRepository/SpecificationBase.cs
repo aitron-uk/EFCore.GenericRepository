@@ -1,5 +1,5 @@
-﻿// <copyright file="SpecificationBase.cs" company="TanvirArjel">
-// Copyright (c) TanvirArjel. All rights reserved.
+﻿// <copyright file="SpecificationBase.cs" company="Aitron">
+// Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
 using System;
@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Query;
-using TanvirArjel.EFCore.GenericRepository.Entities;
+using Aitron.EFCore.GenericRepository.Entities;
 
-namespace TanvirArjel.EFCore.GenericRepository
+namespace Aitron.EFCore.GenericRepository
 {
     /// <summary>
     /// This object hold the query specifications.

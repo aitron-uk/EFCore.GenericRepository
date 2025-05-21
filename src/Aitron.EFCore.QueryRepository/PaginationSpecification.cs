@@ -1,11 +1,11 @@
-﻿// <copyright file="PaginationSpecification.cs" company="TanvirArjel">
-// Copyright (c) TanvirArjel. All rights reserved.
+﻿// <copyright file="PaginationSpecification.cs" company="Aitron">
+// Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
 using Microsoft.EntityFrameworkCore;
-using TanvirArjel.EFCore.GenericRepository.Entities;
+using Aitron.EFCore.GenericRepository.Entities;
 
-namespace TanvirArjel.EFCore.GenericRepository
+namespace Aitron.EFCore.GenericRepository
 {
     /// <summary>
     /// This object holds the pagination query specifications.

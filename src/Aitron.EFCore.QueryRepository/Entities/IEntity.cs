@@ -1,6 +1,6 @@
 using System;
 
-namespace TanvirArjel.EFCore.GenericRepository.Entities;
+namespace Aitron.EFCore.GenericRepository.Entities;
 
 public abstract class IEntity
 {

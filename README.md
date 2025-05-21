@@ -26,7 +26,7 @@ PaginatedList<EmployeeDto> paginatedList = await _repository.GetListAsync(specif
 ### Free raw SQL support:
 
 ```C#
-List<string> search = new List<string>() { "Tanvir", "Software" };
+List<string> search = new List<string>() { "Aitron", "Software" };
 string sqlQuery = "Select EmployeeName, DepartmentName from Employee Where EmployeeName LIKE @p0 + '%' and DepartmentName LIKE @p1 + '%'";
 List<EmployeeDto> items = await _repository.GetFromRawSqlAsync<EmployeeDto>(sqlQuery, search);
 
@@ -60,18 +60,18 @@ List<EmployeeDto> items = await _repository.GetFromRawSqlAsync<EmployeeDto>(sqlQ
 
 ### For full version (both query and command support):
     
-First install the latest version of `TanvirArjel.EFCore.GenericRepository` [nuget](https://www.nuget.org/packages/TanvirArjel.EFCore.GenericRepository) package into your project as follows:
+First install the latest version of `Aitron.EFCore.GenericRepository` [nuget](https://www.nuget.org/packages/Aitron.EFCore.GenericRepository) package into your project as follows:
 
 **Package Manager Console:**
 
 ```C#
-Install-Package TanvirArjel.EFCore.GenericRepository
+Install-Package Aitron.EFCore.GenericRepository
 ```
     
 **.NET CLI:**
 
 ```C#
-dotnet add package TanvirArjel.EFCore.GenericRepository
+dotnet add package Aitron.EFCore.GenericRepository
 ```
     
 Then in the `ConfigureServices` method of the `Startup` class:
@@ -90,18 +90,18 @@ public void ConfigureServices(IServiceCollection services)
 
 ### For query version only:
     
-First install the latest version of `TanvirArjel.EFCore.QueryRepository` [nuget](https://www.nuget.org/packages/TanvirArjel.EFCore.QueryRepository) package into your project as follows:
+First install the latest version of `Aitron.EFCore.QueryRepository` [nuget](https://www.nuget.org/packages/Aitron.EFCore.QueryRepository) package into your project as follows:
 
 **Package Manager Console:**
 
 ```C#
-Install-Package TanvirArjel.EFCore.QueryRepository
+Install-Package Aitron.EFCore.QueryRepository
 ```
     
 **.NET CLI:**
 
 ```C#
-dotnet add package TanvirArjel.EFCore.QueryRepository
+dotnet add package Aitron.EFCore.QueryRepository
 ```
     
 Then in the `ConfigureServices` method of the `Startup` class:
@@ -164,4 +164,4 @@ public class EmployeeService
 }
 ```
     
-### For more detail documentation, please visit [Documentation Wiki](https://github.com/TanvirArjel/EFCore.GenericRepository/wiki)
+### For more detail documentation, please visit [Documentation Wiki](https://github.com/aitron-uk/EFCore.GenericRepository/wiki)

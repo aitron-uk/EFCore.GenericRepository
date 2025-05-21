@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using TanvirArjel.EFCore.GenericRepository;
+using Aitron.EFCore.GenericRepository;
 using Xunit;
 
 namespace UnitTest
@@ -24,7 +24,7 @@ namespace UnitTest
             // Arrange
             List<EmployeeDto> fakeEmployeeList = new List<EmployeeDto>()
             {
-                new EmployeeDto { EmployeeName = "Tanvir", DepartmentName = "Software" }
+                new EmployeeDto { EmployeeName = "Aitron", DepartmentName = "Software" }
             };
 
             mockRepository.Setup(mr => mr.GetListAsync(

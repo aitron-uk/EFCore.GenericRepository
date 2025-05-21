@@ -1,14 +1,14 @@
-﻿// <copyright file="SpecificationEvaluator.cs" company="TanvirArjel">
-// Copyright (c) TanvirArjel. All rights reserved.
+﻿// <copyright file="SpecificationEvaluator.cs" company="Aitron">
+// Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
 using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
-using TanvirArjel.EFCore.GenericRepository.Entities;
+using Aitron.EFCore.GenericRepository.Entities;
 
-namespace TanvirArjel.EFCore.GenericRepository
+namespace Aitron.EFCore.GenericRepository
 {
     internal static class SpecificationEvaluator
     {

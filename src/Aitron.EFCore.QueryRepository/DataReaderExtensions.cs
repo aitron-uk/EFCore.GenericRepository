@@ -1,11 +1,11 @@
-﻿// <copyright file="DataReaderExtensions.cs" company="TanvirArjel">
-// Copyright (c) TanvirArjel. All rights reserved.
+﻿// <copyright file="DataReaderExtensions.cs" company="Aitron">
+// Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
 using System;
 using System.Data;
 
-namespace TanvirArjel.EFCore.GenericRepository
+namespace Aitron.EFCore.GenericRepository
 {
     internal static class DataReaderExtensions
     {

@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TanvirArjel.EFCore.GenericRepository\TanvirArjel.EFCore.GenericRepository.csproj" />
+    <ProjectReference Include="..\..\src\Aitron.EFCore.GenericRepository\Aitron.EFCore.GenericRepository.csproj" />
   </ItemGroup>
 
   <ItemGroup>

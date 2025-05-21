@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Moq.EntityFrameworkCore;
-using TanvirArjel.EFCore.GenericRepository;
+using Aitron.EFCore.GenericRepository;
 
 namespace EFCore.QueryRepository.Tests;
 
