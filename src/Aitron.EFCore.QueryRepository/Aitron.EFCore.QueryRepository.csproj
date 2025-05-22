@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net8.0</TargetFrameworks>
-		<Version>1.5.3</Version>
+		<Version>1.5.4</Version>
 		<LangVersion>Latest</LangVersion>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<!-- <GeneratePackageOnBuild>true</GeneratePackageOnBuild> -->

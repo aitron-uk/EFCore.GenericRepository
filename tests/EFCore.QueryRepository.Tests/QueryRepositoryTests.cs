@@ -11,7 +11,8 @@ public class QueryRepositoryTests
     {
         new()
         {
-            Id = 1,
+
+            Id = new Guid("00000000-0000-0000-0000-000000000000"),
             DepartmentId = 1,
             Name = "Mark",
             Department = new Department
@@ -22,7 +23,8 @@ public class QueryRepositoryTests
         },
         new()
         {
-            Id = 2,
+            // add guid full formate id 
+            Id = new Guid("00000000-0000-0000-0000-000000000001"),
             DepartmentId = 1,
             Name = "Merry",
             Department = new Department
@@ -54,7 +56,8 @@ public class QueryRepositoryTests
     public async Task GetListAsync_WithCondition_Test()
     {
         // Arrange
-        int expectedCount = fakeEmployees.Where(e => e.Id == 1).Count();
+        Guid expectedId = new Guid("00000000-0000-0000-0000-000000000000");
+        int expectedCount = fakeEmployees.Where(e => e.Id == expectedId).Count();
         string expectedName = "Mark";
 
         Mock<DemoDbContext> mockDemoContext = new();
@@ -62,7 +65,7 @@ public class QueryRepositoryTests
 
         // Act
         QueryRepository<DemoDbContext> queryRepository = new(mockDemoContext.Object);
-        List<Employee> employees = await queryRepository.GetListAsync<Employee>(e => e.Id == 1);
+        List<Employee> employees = await queryRepository.GetListAsync<Employee>(e => e.Id == expectedId);
 
         // Assert
         Assert.NotNull(employees);

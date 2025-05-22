@@ -4,16 +4,19 @@ using AspNetCoreApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AspNetCore5._0.Data.Migrations1
+namespace AspNetCore5._0.Data.Migrations2
 {
-    [DbContext(typeof(Demo1DbContext))]
-    partial class Demo1DbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(Demo2DbContext))]
+    [Migration("20250522005346_UpdateEmployee")]
+    partial class UpdateEmployee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

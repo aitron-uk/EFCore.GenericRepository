@@ -1,10 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Aitron.EFCore.GenericRepository.Entities;
 
 namespace AspNetCoreApp.Data.Models;
 
-public class Employee : IArchivableEntity
+public class Employee : IEntity
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+    public DateTime DateModified { get; set; } = DateTime.UtcNow;
+
     [Key]
     public long EmployeeId { get; set; }
 

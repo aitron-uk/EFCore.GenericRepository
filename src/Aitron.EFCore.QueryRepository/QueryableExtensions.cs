@@ -76,7 +76,7 @@ namespace Aitron.EFCore.GenericRepository
             this IQueryable<T> source,
             PaginationSpecification<T> specification,
             CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             if (source == null)
             {

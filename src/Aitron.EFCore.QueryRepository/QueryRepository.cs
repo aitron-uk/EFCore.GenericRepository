@@ -13,10 +13,10 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Aitron.EFCore.GenericRepository.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
-using Aitron.EFCore.GenericRepository.Entities;
 
 [assembly: InternalsVisibleTo("Aitron.EFCore.GenericRepository")]
 [assembly: InternalsVisibleTo("EFCore.QueryRepository.Tests")]
@@ -35,19 +35,19 @@ namespace Aitron.EFCore.GenericRepository
         }
 
         public IQueryable<T> GetQueryable<T>()
-            where T : IEntity
+            where T : class, IEntity
         {
             return _dbContext.Set<T>();
         }
 
         public Task<List<T>> GetListAsync<T>(CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             return GetListAsync<T>(false, cancellationToken);
         }
 
         public Task<List<T>> GetListAsync<T>(bool asTracked, CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             Func<IQueryable<T>, IIncludableQueryable<T, object>> nullValue = null;
             return GetListAsync(nullValue, asTracked, cancellationToken);
@@ -56,7 +56,7 @@ namespace Aitron.EFCore.GenericRepository
         public Task<List<T>> GetListAsync<T>(
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             return GetListAsync(includes, false, cancellationToken);
         }
@@ -65,7 +65,7 @@ namespace Aitron.EFCore.GenericRepository
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             bool asTracked,
             CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -85,7 +85,7 @@ namespace Aitron.EFCore.GenericRepository
         }
 
         public Task<List<T>> GetListAsync<T>(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
-             where T : IEntity
+             where T : class, IEntity
         {
             return GetListAsync(condition, false, cancellationToken);
         }
@@ -94,7 +94,7 @@ namespace Aitron.EFCore.GenericRepository
             Expression<Func<T, bool>> condition,
             bool asTracked,
             CancellationToken cancellationToken = default)
-             where T : IEntity
+             where T : class, IEntity
         {
             return GetListAsync(condition, null, asTracked, cancellationToken);
         }
@@ -104,7 +104,7 @@ namespace Aitron.EFCore.GenericRepository
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             bool asTracked,
             CancellationToken cancellationToken = default)
-             where T : IEntity
+             where T : class, IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -129,7 +129,7 @@ namespace Aitron.EFCore.GenericRepository
         }
 
         public Task<List<T>> GetListAsync<T>(Specification<T> specification, CancellationToken cancellationToken = default)
-           where T : IEntity
+           where T : class, IEntity
         {
             return GetListAsync(specification, false, cancellationToken);
         }
@@ -138,7 +138,7 @@ namespace Aitron.EFCore.GenericRepository
             Specification<T> specification,
             bool asTracked,
             CancellationToken cancellationToken = default)
-           where T : IEntity
+           where T : class, IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -158,7 +158,7 @@ namespace Aitron.EFCore.GenericRepository
         public async Task<List<TProjectedType>> GetListAsync<T, TProjectedType>(
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             if (selectExpression == null)
             {
@@ -175,7 +175,7 @@ namespace Aitron.EFCore.GenericRepository
             Expression<Func<T, bool>> condition,
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             if (selectExpression == null)
             {
@@ -199,7 +199,7 @@ namespace Aitron.EFCore.GenericRepository
             Specification<T> specification,
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             if (selectExpression == null)
             {
@@ -220,7 +220,7 @@ namespace Aitron.EFCore.GenericRepository
         public Task<PaginatedList<T>> GetListAsync<T>(
                    PaginationSpecification<T> specification,
                    CancellationToken cancellationToken = default)
-                   where T : IEntity
+                   where T : class, IEntity
         {
             return GetListAsync(specification, false, cancellationToken);
         }
@@ -229,7 +229,7 @@ namespace Aitron.EFCore.GenericRepository
             PaginationSpecification<T> specification,
             bool asTracked,
             CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             if (specification == null)
             {
@@ -250,7 +250,7 @@ namespace Aitron.EFCore.GenericRepository
             PaginationSpecification<T> specification,
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
             where TProjectedType : class
         {
             if (specification == null)
@@ -271,7 +271,7 @@ namespace Aitron.EFCore.GenericRepository
         }
 
         public Task<T> GetByIdAsync<T>(object id, CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             if (id == null)
             {
@@ -282,7 +282,7 @@ namespace Aitron.EFCore.GenericRepository
         }
 
         public Task<T> GetByIdAsync<T>(object id, bool asTracked, CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             if (id == null)
             {
@@ -296,7 +296,7 @@ namespace Aitron.EFCore.GenericRepository
             object id,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             if (id == null)
             {
@@ -311,7 +311,7 @@ namespace Aitron.EFCore.GenericRepository
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             bool asTracked = false,
             CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             if (id == null)
             {
@@ -365,7 +365,7 @@ namespace Aitron.EFCore.GenericRepository
             object id,
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             if (id == null)
             {
@@ -415,7 +415,7 @@ namespace Aitron.EFCore.GenericRepository
         public Task<T> GetAsync<T>(
             Expression<Func<T, bool>> condition,
             CancellationToken cancellationToken = default)
-           where T : IEntity
+           where T : class, IEntity
         {
             return GetAsync(condition, null, false, cancellationToken);
         }
@@ -424,7 +424,7 @@ namespace Aitron.EFCore.GenericRepository
             Expression<Func<T, bool>> condition,
             bool asTracked,
             CancellationToken cancellationToken = default)
-           where T : IEntity
+           where T : class, IEntity
         {
             return GetAsync(condition, null, asTracked, cancellationToken);
         }
@@ -433,7 +433,7 @@ namespace Aitron.EFCore.GenericRepository
             Expression<Func<T, bool>> condition,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             CancellationToken cancellationToken = default)
-           where T : IEntity
+           where T : class, IEntity
         {
             return GetAsync(condition, includes, false, cancellationToken);
         }
@@ -443,7 +443,7 @@ namespace Aitron.EFCore.GenericRepository
             Func<IQueryable<T>, IIncludableQueryable<T, object>> includes,
             bool asTracked,
             CancellationToken cancellationToken = default)
-           where T : IEntity
+           where T : class, IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -466,13 +466,13 @@ namespace Aitron.EFCore.GenericRepository
         }
 
         public Task<T> GetAsync<T>(Specification<T> specification, CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             return GetAsync(specification, false, cancellationToken);
         }
 
         public async Task<T> GetAsync<T>(Specification<T> specification, bool asTracked, CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -493,7 +493,7 @@ namespace Aitron.EFCore.GenericRepository
             Expression<Func<T, bool>> condition,
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             if (selectExpression == null)
             {
@@ -514,7 +514,7 @@ namespace Aitron.EFCore.GenericRepository
             Specification<T> specification,
             Expression<Func<T, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             if (selectExpression == null)
             {
@@ -532,13 +532,13 @@ namespace Aitron.EFCore.GenericRepository
         }
 
         public Task<bool> ExistsAsync<T>(CancellationToken cancellationToken = default)
-           where T : IEntity
+           where T : class, IEntity
         {
             return ExistsAsync<T>(null, cancellationToken);
         }
 
         public async Task<bool> ExistsAsync<T>(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
-           where T : IEntity
+           where T : class, IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -552,7 +552,7 @@ namespace Aitron.EFCore.GenericRepository
         }
 
         public async Task<bool> ExistsByIdAsync<T>(object id, CancellationToken cancellationToken = default)
-           where T : IEntity
+           where T : class, IEntity
         {
             if (id == null)
             {
@@ -593,14 +593,14 @@ namespace Aitron.EFCore.GenericRepository
         }
 
         public async Task<int> GetCountAsync<T>(CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             int count = await _dbContext.Set<T>().CountAsync(cancellationToken).ConfigureAwait(false);
             return count;
         }
 
         public async Task<int> GetCountAsync<T>(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -613,7 +613,7 @@ namespace Aitron.EFCore.GenericRepository
         }
 
         public async Task<int> GetCountAsync<T>(IEnumerable<Expression<Func<T, bool>>> conditions, CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -629,14 +629,14 @@ namespace Aitron.EFCore.GenericRepository
         }
 
         public async Task<long> GetLongCountAsync<T>(CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             long count = await _dbContext.Set<T>().LongCountAsync(cancellationToken).ConfigureAwait(false);
             return count;
         }
 
         public async Task<long> GetLongCountAsync<T>(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
@@ -649,7 +649,7 @@ namespace Aitron.EFCore.GenericRepository
         }
 
         public async Task<long> GetLongCountAsync<T>(IEnumerable<Expression<Func<T, bool>>> conditions, CancellationToken cancellationToken = default)
-            where T : IEntity
+            where T : class, IEntity
         {
             IQueryable<T> query = _dbContext.Set<T>();
 

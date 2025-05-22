@@ -2,7 +2,7 @@ using System;
 
 namespace Aitron.EFCore.GenericRepository.Entities;
 
-public abstract class IEntity
+public interface IEntity
 {
     Guid Id { get; }
 

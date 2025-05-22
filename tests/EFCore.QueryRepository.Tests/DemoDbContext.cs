@@ -29,8 +29,9 @@ public class DemoDbContext : DbContext
 
 public class Employee : IEntity
 {
-    public int Id { get; set; }
-
+    public Guid Id { get; set; } 
+    public DateTime DateCreated { get; set; } 
+    public DateTime DateModified { get; set; }
     public int DepartmentId { get; set; }
 
     public string Name { get; set; }
