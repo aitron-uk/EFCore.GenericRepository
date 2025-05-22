@@ -8,8 +8,8 @@
 		<!-- <GeneratePackageOnBuild>true</GeneratePackageOnBuild> -->
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
 		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
-		<AssemblyName>Aitron.EFCore.GenericRepository</AssemblyName>
-		<RootNamespace>Aitron.EFCore.GenericRepository</RootNamespace>
+		<AssemblyName>Hazelnut.EFCore.GenericRepository</AssemblyName>
+		<RootNamespace>Hazelnut.EFCore.GenericRepository</RootNamespace>
 		<Description>
 			This library is a Generic Repository implementation for EF Core ORM which will remove developers' pain to write repository layer for each .NET Core and .NET project.
 
@@ -42,6 +42,7 @@
 		<PackageProjectUrl>https://github.com/aitron-uk/EFCore.GenericRepository</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/aitron-uk/EFCore.GenericRepository</RepositoryUrl>
 		<RepositoryType>Git</RepositoryType>
+		<PackageId>Hazelnut.EFCore.GenericRepository</PackageId>
 		<PackageTags>EFCore, RepositoryLayer, GenericRepository, UnitOfWork, .NET, .NETCore, ASP.NETCore</PackageTags>
 		<PackageReleaseNotes>
 			1. dotNET 8.0 support has been added.
@@ -91,11 +92,11 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(UseLocalProjects)' != 'true'">
-		<PackageReference Include="Aitron.EFCore.QueryRepository" Version="1.5.4" />
+		<PackageReference Include="Hazelnut.EFCore.QueryRepository" Version="1.5.4" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(UseLocalProjects)' == 'true'">
-		<ProjectReference Include="..\Aitron.EFCore.QueryRepository\Aitron.EFCore.QueryRepository.csproj" />
+	<ItemGroup>
+	  <ProjectReference Include="..\Aitron.EFCore.QueryRepository\Hazelnut.EFCore.QueryRepository.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@
 // Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
-namespace Aitron.EFCore.GenericRepository
+namespace Hazelnut.EFCore.GenericRepository
 {
     /// <summary>
     /// Enum to set record state.

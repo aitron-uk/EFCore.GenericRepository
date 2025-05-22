@@ -11,9 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using Aitron.EFCore.GenericRepository.Entities;
+using Hazelnut.EFCore.GenericRepository.Entities;
 
-namespace Aitron.EFCore.GenericRepository
+namespace Hazelnut.EFCore.GenericRepository
 {
     /// <summary>
     /// Contains all the query methods. If you register the multiple DbContexts, it will use the last one.

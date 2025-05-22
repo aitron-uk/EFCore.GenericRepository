@@ -2,9 +2,9 @@
 // Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
-using Aitron.EFCore.GenericRepository.Entities;
+using Hazelnut.EFCore.GenericRepository.Entities;
 
-namespace Aitron.EFCore.GenericRepository
+namespace Hazelnut.EFCore.GenericRepository
 {
     /// <summary>
     /// This object hold the query specifications.

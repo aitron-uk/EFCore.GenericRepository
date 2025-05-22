@@ -1,6 +1,6 @@
 using System;
 
-namespace Aitron.EFCore.GenericRepository.Entities;
+namespace Hazelnut.EFCore.GenericRepository.Entities;
 
 public interface IEntity
 {

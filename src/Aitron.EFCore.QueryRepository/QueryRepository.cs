@@ -13,15 +13,15 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Aitron.EFCore.GenericRepository.Entities;
+using Hazelnut.EFCore.GenericRepository.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
 
-[assembly: InternalsVisibleTo("Aitron.EFCore.GenericRepository")]
+[assembly: InternalsVisibleTo("Hazelnut.EFCore.GenericRepository")]
 [assembly: InternalsVisibleTo("EFCore.QueryRepository.Tests")]
 
-namespace Aitron.EFCore.GenericRepository
+namespace Hazelnut.EFCore.GenericRepository
 {
     // [DebuggerStepThrough]
     internal class QueryRepository<TDbContext> : IQueryRepository, IQueryRepository<TDbContext>

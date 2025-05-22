@@ -5,7 +5,7 @@
 using System;
 using System.Data;
 
-namespace Aitron.EFCore.GenericRepository
+namespace Hazelnut.EFCore.GenericRepository
 {
     internal static class DataReaderExtensions
     {

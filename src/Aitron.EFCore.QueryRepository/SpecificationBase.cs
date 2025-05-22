@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Query;
-using Aitron.EFCore.GenericRepository.Entities;
+using Hazelnut.EFCore.GenericRepository.Entities;
 
-namespace Aitron.EFCore.GenericRepository
+namespace Hazelnut.EFCore.GenericRepository
 {
     /// <summary>
     /// This object hold the query specifications.

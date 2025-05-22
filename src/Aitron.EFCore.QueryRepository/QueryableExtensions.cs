@@ -9,9 +9,9 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Aitron.EFCore.GenericRepository.Entities;
+using Hazelnut.EFCore.GenericRepository.Entities;
 
-namespace Aitron.EFCore.GenericRepository
+namespace Hazelnut.EFCore.GenericRepository
 {
     /// <summary>
     /// Contains <see cref="Queryable"/> extension methods for paginated list.

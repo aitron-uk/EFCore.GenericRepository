@@ -6,9 +6,9 @@ using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
-using Aitron.EFCore.GenericRepository.Entities;
+using Hazelnut.EFCore.GenericRepository.Entities;
 
-namespace Aitron.EFCore.GenericRepository
+namespace Hazelnut.EFCore.GenericRepository
 {
     internal static class SpecificationEvaluator
     {

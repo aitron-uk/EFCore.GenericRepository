@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Aitron.EFCore.GenericRepository
+namespace Hazelnut.EFCore.GenericRepository
 {
     /// <summary>
     /// The object contains pagination info and items.

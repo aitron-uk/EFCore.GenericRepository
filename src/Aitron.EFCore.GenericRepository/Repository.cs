@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Aitron.EFCore.GenericRepository
+namespace Hazelnut.EFCore.GenericRepository
 {
     [DebuggerStepThrough]
     internal sealed class Repository<TDbContext> : QueryRepository<TDbContext>, IRepository, IRepository<TDbContext>

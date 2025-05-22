@@ -1,4 +1,4 @@
-﻿namespace Aitron.EFCore.GenericRepository.Entities;
+﻿namespace Hazelnut.EFCore.GenericRepository.Entities;
 
 public interface IArchivableEntity : IEntity
 {

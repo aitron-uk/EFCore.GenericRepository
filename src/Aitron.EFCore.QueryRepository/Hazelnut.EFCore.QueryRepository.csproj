@@ -8,8 +8,8 @@
 		<!-- <GeneratePackageOnBuild>true</GeneratePackageOnBuild> -->
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
 		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
-		<AssemblyName>Aitron.EFCore.QueryRepository</AssemblyName>
-		<RootNamespace>Aitron.EFCore.GenericRepository</RootNamespace>
+		<AssemblyName>Hazelnut.EFCore.QueryRepository</AssemblyName>
+		<RootNamespace>Hazelnut.EFCore.GenericRepository</RootNamespace>
 		<Description>
 			This library is a Generic Query Repository implementation for EF Core ORM which will remove developers' pain to write query repository layer for each .NET Core and .NET project.
 

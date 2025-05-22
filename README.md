@@ -60,18 +60,18 @@ List<EmployeeDto> items = await _repository.GetFromRawSqlAsync<EmployeeDto>(sqlQ
 
 ### For full version (both query and command support):
     
-First install the latest version of `Aitron.EFCore.GenericRepository` [nuget](https://www.nuget.org/packages/Aitron.EFCore.GenericRepository) package into your project as follows:
+First install the latest version of `Hazelnut.EFCore.GenericRepository` [nuget](https://www.nuget.org/packages/Hazelnut.EFCore.GenericRepository) package into your project as follows:
 
 **Package Manager Console:**
 
 ```C#
-Install-Package Aitron.EFCore.GenericRepository
+Install-Package Hazelnut.EFCore.GenericRepository
 ```
     
 **.NET CLI:**
 
 ```C#
-dotnet add package Aitron.EFCore.GenericRepository
+dotnet add package Hazelnut.EFCore.GenericRepository
 ```
     
 Then in the `ConfigureServices` method of the `Startup` class:
@@ -90,18 +90,18 @@ public void ConfigureServices(IServiceCollection services)
 
 ### For query version only:
     
-First install the latest version of `Aitron.EFCore.QueryRepository` [nuget](https://www.nuget.org/packages/Aitron.EFCore.QueryRepository) package into your project as follows:
+First install the latest version of `Hazelnut.EFCore.QueryRepository` [nuget](https://www.nuget.org/packages/Hazelnut.EFCore.QueryRepository) package into your project as follows:
 
 **Package Manager Console:**
 
 ```C#
-Install-Package Aitron.EFCore.QueryRepository
+Install-Package Hazelnut.EFCore.QueryRepository
 ```
     
 **.NET CLI:**
 
 ```C#
-dotnet add package Aitron.EFCore.QueryRepository
+dotnet add package Hazelnut.EFCore.QueryRepository
 ```
     
 Then in the `ConfigureServices` method of the `Startup` class:
