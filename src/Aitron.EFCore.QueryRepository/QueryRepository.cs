@@ -76,7 +76,7 @@ namespace Hazelnut.EFCore.GenericRepository
 
             if (asTracked == false)
             {
-                query = query.AsNoTracking();
+                query = query.AsNoTrackingWithIdentityResolution();
             }
 
             List<T> items = await query.ToListAsync(cancellationToken).ConfigureAwait(false);
@@ -120,7 +120,7 @@ namespace Hazelnut.EFCore.GenericRepository
 
             if (asTracked == false)
             {
-                query = query.AsNoTracking();
+                query = query.AsNoTrackingWithIdentityResolution();
             }
 
             List<T> items = await query.ToListAsync(cancellationToken).ConfigureAwait(false);
@@ -149,7 +149,7 @@ namespace Hazelnut.EFCore.GenericRepository
 
             if (asTracked == false)
             {
-                query = query.AsNoTracking();
+                query = query.AsNoTrackingWithIdentityResolution();
             }
 
             return await query.ToListAsync(cancellationToken).ConfigureAwait(false);
@@ -240,7 +240,7 @@ namespace Hazelnut.EFCore.GenericRepository
 
             if (asTracked == false)
             {
-                query = query.AsNoTracking();
+                query = query.AsNoTrackingWithIdentityResolution();
             }
 
             return await query.ToPaginatedListAsync(specification, cancellationToken); ;
@@ -354,7 +354,7 @@ namespace Hazelnut.EFCore.GenericRepository
 
             if (!asTracked)
             {
-                query = query.AsNoTracking();
+                query = query.AsNoTrackingWithIdentityResolution();
             }
 
             T entity = await query.FirstOrDefaultAsync(expressionTree, cancellationToken).ConfigureAwait(false);
@@ -459,7 +459,7 @@ namespace Hazelnut.EFCore.GenericRepository
 
             if (asTracked == false)
             {
-                query = query.AsNoTracking();
+                query = query.AsNoTrackingWithIdentityResolution();
             }
 
             return await query.FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
@@ -483,7 +483,7 @@ namespace Hazelnut.EFCore.GenericRepository
 
             if (asTracked == false)
             {
-                query = query.AsNoTracking();
+                query = query.AsNoTrackingWithIdentityResolution();
             }
 
             return await query.FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
