@@ -21,7 +21,7 @@ public interface IEntity
     /// <value>
     /// The created by.
     /// </value>
-    Guid CreatedBy { get; set; }
+    Guid CreatedById { get; set; }
 
     /// <summary>
     /// Gets or sets the date modified.
@@ -37,5 +37,5 @@ public interface IEntity
     /// <value>
     /// The modified by.
     /// </value>
-    Guid? ModifiedBy { get; set; }
+    Guid? ModifiedById { get; set; }
 }
