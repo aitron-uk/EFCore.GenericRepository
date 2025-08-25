@@ -220,37 +220,49 @@ namespace Hazelnut.EFCore.GenericRepository
                 throw new ArgumentNullException(nameof(entity));
             }
 
+            // First, check if the entity is already being tracked by reference
             EntityEntry<TEntity> trackedEntity = _dbContext.ChangeTracker
-                .Entries<TEntity>().FirstOrDefault(x => x.Entity == entity);
+                .Entries<TEntity>()
+                .FirstOrDefault(x => x.Entity == entity);
 
-            if (trackedEntity == null)
+            if (trackedEntity != null)
             {
-                IEntityType entityType = _dbContext.Model.FindEntityType(typeof(TEntity));
-
-                if (entityType == null)
-                {
-                    throw new InvalidOperationException($"{typeof(TEntity).Name} is not part of EF Core DbContext model");
-                }
-
-                string primaryKeyName = entityType.FindPrimaryKey().Properties.Select(p => p.Name).FirstOrDefault();
-
-                if (primaryKeyName != null)
-                {
-                    Type primaryKeyType = entityType.FindPrimaryKey().Properties.Select(p => p.ClrType).FirstOrDefault();
-
-                    object primaryKeyDefaultValue = primaryKeyType.IsValueType ? Activator.CreateInstance(primaryKeyType) : null;
-
-                    object primaryValue = entity.GetType().GetProperty(primaryKeyName).GetValue(entity, null);
-
-                    if (primaryKeyDefaultValue.Equals(primaryValue))
-                    {
-                        throw new InvalidOperationException("The primary key value of the entity to be updated is not valid.");
-                    }
-                }
-
-                _dbContext.Set<TEntity>().Update(entity);
+                // Already tracked by reference – safe to skip Update
+                return;
             }
+
+            // If not tracked by reference, check if an entity with the same primary key is already tracked
+            IEntityType entityType = _dbContext.Model.FindEntityType(typeof(TEntity)) 
+                ?? throw new InvalidOperationException($"{typeof(TEntity).Name} is not part of EF Core DbContext model");
+
+            string primaryKeyName = entityType.FindPrimaryKey().Properties.Select(p => p.Name).FirstOrDefault();
+            if (primaryKeyName != null)
+            {
+                Type primaryKeyType = entityType.FindPrimaryKey().Properties.Select(p => p.ClrType).FirstOrDefault();
+                object primaryKeyDefaultValue = primaryKeyType.IsValueType ? Activator.CreateInstance(primaryKeyType) : null;
+                object primaryValue = entity.GetType().GetProperty(primaryKeyName).GetValue(entity, null);
+
+                if (primaryKeyDefaultValue.Equals(primaryValue))
+                {
+                    throw new InvalidOperationException("The primary key value of the entity to be updated is not valid.");
+                }
+
+                // Check if an entity with the same key is tracked
+                bool sameKeyTracked = _dbContext.ChangeTracker
+                    .Entries<TEntity>()
+                    .Any(e => e.Property(primaryKeyName).CurrentValue?.Equals(primaryValue) == true);
+
+                if (sameKeyTracked)
+                {
+                    // Already tracked by key – do not attach again
+                    return;
+                }
+            }
+
+            // Attach and mark entity as modified (preserves all your existing checks)
+            _dbContext.Set<TEntity>().Update(entity);
         }
+
 
         public void Update<TEntity>(IEnumerable<TEntity> entities)
             where TEntity : class
@@ -260,8 +272,60 @@ namespace Hazelnut.EFCore.GenericRepository
                 throw new ArgumentNullException(nameof(entities));
             }
 
-            _dbContext.Set<TEntity>().UpdateRange(entities);
+            IEntityType entityType = _dbContext.Model.FindEntityType(typeof(TEntity))
+                ?? throw new InvalidOperationException($"{typeof(TEntity).Name} is not part of EF Core DbContext model");
+
+            string primaryKeyName = entityType.FindPrimaryKey().Properties.Select(p => p.Name).FirstOrDefault();
+            Type primaryKeyType = primaryKeyName != null
+                ? entityType.FindPrimaryKey().Properties.Select(p => p.ClrType).FirstOrDefault()
+                : null;
+
+            foreach (var entity in entities)
+            {
+                if (entity == null)
+                {
+                    throw new ArgumentNullException(nameof(TEntity), "One of the entities in the collection is null.");
+                }
+
+                // Check if the entity is already tracked by reference
+                EntityEntry<TEntity> trackedEntity = _dbContext.ChangeTracker
+                    .Entries<TEntity>()
+                    .FirstOrDefault(x => x.Entity == entity);
+
+                if (trackedEntity != null)
+                {
+                    // Already tracked by reference – skip
+                    continue;
+                }
+
+                // Primary key validation
+                if (primaryKeyName != null)
+                {
+                    object primaryKeyDefaultValue = primaryKeyType.IsValueType ? Activator.CreateInstance(primaryKeyType) : null;
+                    object primaryValue = entity.GetType().GetProperty(primaryKeyName).GetValue(entity, null);
+
+                    if (primaryKeyDefaultValue.Equals(primaryValue))
+                    {
+                        throw new InvalidOperationException("The primary key value of one of the entities to be updated is not valid.");
+                    }
+
+                    // Check if an entity with the same key is already tracked
+                    bool sameKeyTracked = _dbContext.ChangeTracker
+                        .Entries<TEntity>()
+                        .Any(e => e.Property(primaryKeyName).CurrentValue?.Equals(primaryValue) == true);
+
+                    if (sameKeyTracked)
+                    {
+                        // Already tracked by key – skip
+                        continue;
+                    }
+                }
+
+                // Attach and mark entity as modified (preserves your original validation logic)
+                _dbContext.Set<TEntity>().Update(entity);
+            }
         }
+
 
         public void Remove<TEntity>(TEntity entity)
             where TEntity : class
