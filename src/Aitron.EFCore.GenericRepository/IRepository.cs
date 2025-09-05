@@ -218,6 +218,39 @@ namespace Hazelnut.EFCore.GenericRepository
             where TEntity : class;
 
         /// <summary>
+        /// Deletes an entity by its primary key value without attaching navigation properties.
+        /// <para>
+        /// This avoids reloading related entities and is useful when working with detached objects
+        /// (e.g., when using <c>AsNoTracking</c> queries). 
+        /// </para>
+        /// Call <see cref="DbContext.SaveChangesAsync(CancellationToken)"/> to persist the deletion.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity to delete.</typeparam>
+        /// <typeparam name="TKey">The type of the primary key.</typeparam>
+        /// <param name="id">The primary key value of the entity to delete.</param>
+        void RemoveById<TEntity, TKey>(TKey id)
+            where TEntity : class, new();
+
+        /// <summary>
+        /// Deletes all entities that match the given <paramref name="predicate"/>.
+        /// <para>
+        /// Requires EF Core 7 or higher, since it uses <c>ExecuteDelete()</c> to perform
+        /// the operation directly in the database without loading entities into memory.
+        /// </para>
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entities to delete.</typeparam>
+        /// <param name="predicate">A LINQ expression used to filter which entities should be deleted.</param>
+        /// <remarks>
+        /// This operation executes immediately against the database, rather than being deferred
+        /// until <see cref="DbContext.SaveChanges()"/> is called. It also does not interact with 
+        /// the EF change tracker in any way: entity instances which happen to be tracked when 
+        /// this operation is invoked aren't taken into account, and aren't updated to reflect 
+        /// the changes.
+        /// </remarks>
+        void RemoveWhere<TEntity>(Expression<Func<TEntity, bool>> predicate)
+            where TEntity : class;
+
+        /// <summary>
         /// Saves all changes made in this context to the database.
         /// </summary>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>

@@ -232,7 +232,7 @@ namespace Hazelnut.EFCore.GenericRepository
             }
 
             // If not tracked by reference, check if an entity with the same primary key is already tracked
-            IEntityType entityType = _dbContext.Model.FindEntityType(typeof(TEntity)) 
+            IEntityType entityType = _dbContext.Model.FindEntityType(typeof(TEntity))
                 ?? throw new InvalidOperationException($"{typeof(TEntity).Name} is not part of EF Core DbContext model");
 
             string primaryKeyName = entityType.FindPrimaryKey().Properties.Select(p => p.Name).FirstOrDefault();
@@ -326,7 +326,6 @@ namespace Hazelnut.EFCore.GenericRepository
             }
         }
 
-
         public void Remove<TEntity>(TEntity entity)
             where TEntity : class
         {
@@ -347,6 +346,30 @@ namespace Hazelnut.EFCore.GenericRepository
             }
 
             _dbContext.Set<TEntity>().RemoveRange(entities);
+        }
+
+        public void RemoveById<TEntity, TKey>(TKey id)
+            where TEntity : class, new()
+        {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            var entity = new TEntity();
+            _dbContext.Entry(entity).Property("Id").CurrentValue = id;
+            _dbContext.Entry(entity).State = EntityState.Deleted;
+        }
+
+        public void RemoveWhere<TEntity>(Expression<Func<TEntity, bool>> predicate)
+            where TEntity : class
+        {
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
+
+            _dbContext.Set<TEntity>().Where(predicate).ExecuteDelete();
         }
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
