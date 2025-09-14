@@ -259,8 +259,22 @@ namespace Hazelnut.EFCore.GenericRepository
                 }
             }
 
-            // Attach and mark entity as modified (preserves all your existing checks)
-            _dbContext.Set<TEntity>().Update(entity);
+            // Attach root entity only
+            var entry = _dbContext.Set<TEntity>().Attach(entity);
+            entry.State = EntityState.Modified;
+
+            // Prevent EF from traversing child graphs
+            foreach (var navigation in entry.Navigations)
+            {
+                if (navigation.Metadata.IsCollection)
+                {
+                    navigation.CurrentValue = null;
+                }
+                else
+                {
+                    navigation.CurrentValue = null;
+                }
+            }
         }
 
 
@@ -322,7 +336,22 @@ namespace Hazelnut.EFCore.GenericRepository
                 }
 
                 // Attach and mark entity as modified (preserves your original validation logic)
-                _dbContext.Set<TEntity>().Update(entity);
+                // Attach root entity only
+                var entry = _dbContext.Set<TEntity>().Attach(entity);
+                entry.State = EntityState.Modified;
+
+                // Prevent EF from traversing child graphs
+                foreach (var navigation in entry.Navigations)
+                {
+                    if (navigation.Metadata.IsCollection)
+                    {
+                        navigation.CurrentValue = null;
+                    }
+                    else
+                    {
+                        navigation.CurrentValue = null;
+                    }
+                }
             }
         }
 
