@@ -181,7 +181,8 @@ namespace Hazelnut.EFCore.GenericRepository
         /// </summary>
         /// <typeparam name="TEntity">The type of the <paramref name="entity"/> to be marked as modified.</typeparam>
         /// <param name="entity">The <typeparamref name="TEntity"/> object to be updated to the database on <see cref="SaveChangesAsync(CancellationToken)"/>.</param>
-        void Update<TEntity>(TEntity entity)
+        /// <param name="includeChildren">Set to false if only root entity should be attached, setting value to false will set all navigations to null</param>
+        void Update<TEntity>(TEntity entity, bool includeChildren = true)
             where TEntity : class;
 
         /// <summary>

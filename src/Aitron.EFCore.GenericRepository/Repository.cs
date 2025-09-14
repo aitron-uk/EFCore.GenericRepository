@@ -18,7 +18,6 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Hazelnut.EFCore.GenericRepository
 {
-    [DebuggerStepThrough]
     internal sealed class Repository<TDbContext> : QueryRepository<TDbContext>, IRepository, IRepository<TDbContext>
         where TDbContext : DbContext
     {
@@ -212,7 +211,7 @@ namespace Hazelnut.EFCore.GenericRepository
             await _dbContext.Set<TEntity>().AddRangeAsync(entities, cancellationToken).ConfigureAwait(false);
         }
 
-        public void Update<TEntity>(TEntity entity)
+        public void Update<TEntity>(TEntity entity, bool includeChildren = true)
             where TEntity : class
         {
             if (entity == null)
@@ -258,23 +257,18 @@ namespace Hazelnut.EFCore.GenericRepository
                     return;
                 }
             }
-
-            // Attach root entity only
-            var entry = _dbContext.Set<TEntity>().Attach(entity);
-            entry.State = EntityState.Modified;
-
-            // Prevent EF from traversing child graphs
-            foreach (var navigation in entry.Navigations)
+  
+            if (!includeChildren)
             {
-                if (navigation.Metadata.IsCollection)
-                {
-                    navigation.CurrentValue = null;
-                }
-                else
+                foreach (var navigation in _dbContext.Entry(entity).Navigations)
                 {
                     navigation.CurrentValue = null;
                 }
             }
+
+            // Attach root entity only
+            var entry = _dbContext.Set<TEntity>().Attach(entity);
+            entry.State = EntityState.Modified;
         }
 
 
