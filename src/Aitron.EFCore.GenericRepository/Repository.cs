@@ -230,6 +230,7 @@ namespace Hazelnut.EFCore.GenericRepository
                 return;
             }
 
+
             // If not tracked by reference, check if an entity with the same primary key is already tracked
             IEntityType entityType = _dbContext.Model.FindEntityType(typeof(TEntity))
                 ?? throw new InvalidOperationException($"{typeof(TEntity).Name} is not part of EF Core DbContext model");
@@ -257,18 +258,22 @@ namespace Hazelnut.EFCore.GenericRepository
                     return;
                 }
             }
-  
+
             if (!includeChildren)
             {
                 foreach (var navigation in _dbContext.Entry(entity).Navigations)
                 {
                     navigation.CurrentValue = null;
                 }
-            }
 
-            // Attach root entity only
-            var entry = _dbContext.Set<TEntity>().Attach(entity);
-            entry.State = EntityState.Modified;
+                // Attach root entity only
+                var entry = _dbContext.Set<TEntity>().Attach(entity);
+                entry.State = EntityState.Modified;
+            }
+            else
+            {
+                _dbContext.Set<TEntity>().Update(entity);
+            }
         }
 
 
