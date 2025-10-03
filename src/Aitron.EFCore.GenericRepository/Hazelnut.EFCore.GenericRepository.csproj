@@ -95,8 +95,4 @@
 		<PackageReference Include="Hazelnut.EFCore.QueryRepository" Version="1.5.4" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\Aitron.EFCore.QueryRepository\Hazelnut.EFCore.QueryRepository.csproj" />
-	</ItemGroup>
-
 </Project>
