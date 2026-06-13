@@ -1,4 +1,4 @@
-﻿// <copyright file="ServiceCollectionExtensions.cs" company="Aitron">
+// <copyright file="ServiceCollectionExtensions.cs" company="Aitron">
 // Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
@@ -35,7 +35,7 @@ namespace Hazelnut.EFCore.GenericRepository
                 typeof(IRepository),
                 serviceProvider =>
                 {
-                    TDbContext dbContext = ActivatorUtilities.CreateInstance<TDbContext>(serviceProvider);
+                    TDbContext dbContext = serviceProvider.GetRequiredService<TDbContext>();
                     return new Repository<TDbContext>(dbContext);
                 },
                 lifetime));
@@ -44,7 +44,7 @@ namespace Hazelnut.EFCore.GenericRepository
                typeof(IRepository<TDbContext>),
                serviceProvider =>
                {
-                   TDbContext dbContext = ActivatorUtilities.CreateInstance<TDbContext>(serviceProvider);
+                   TDbContext dbContext = serviceProvider.GetRequiredService<TDbContext>();
                    return new Repository<TDbContext>(dbContext);
                },
                lifetime));
@@ -53,3 +53,4 @@ namespace Hazelnut.EFCore.GenericRepository
         }
     }
 }
+

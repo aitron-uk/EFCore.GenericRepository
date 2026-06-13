@@ -1,4 +1,4 @@
-ï»¿// <copyright file="Repository.cs" company="Aitron">
+// <copyright file="Repository.cs" company="Aitron">
 // Copyright (c) Aitron. All rights reserved.
 // </copyright>
 
@@ -226,7 +226,7 @@ namespace Hazelnut.EFCore.GenericRepository
 
             if (trackedEntity != null)
             {
-                // Already tracked by reference â€“ safe to skip Update
+                // Already tracked by reference – safe to skip Update
                 return;
             }
 
@@ -264,7 +264,7 @@ namespace Hazelnut.EFCore.GenericRepository
                 return;
             }
 
-            // Entity not tracked â€“ attach it
+            // Entity not tracked – attach it
 
             if (!includeChildren)
             {
@@ -314,7 +314,7 @@ namespace Hazelnut.EFCore.GenericRepository
 
                 if (trackedEntity != null)
                 {
-                    // Already tracked by reference â€“ skip
+                    // Already tracked by reference – skip
                     continue;
                 }
 
@@ -330,13 +330,13 @@ namespace Hazelnut.EFCore.GenericRepository
                     }
 
                     // Check if an entity with the same key is already tracked
-                    bool sameKeyTracked = _dbContext.ChangeTracker
+                    EntityEntry<TEntity> existingTracked = _dbContext.ChangeTracker
                         .Entries<TEntity>()
-                        .Any(e => e.Property(primaryKeyName).CurrentValue?.Equals(primaryValue) == true);
+                        .FirstOrDefault(e => e.Property(primaryKeyName).CurrentValue?.Equals(primaryValue) == true);
 
-                    if (sameKeyTracked)
+                    if (existingTracked != null)
                     {
-                        // Already tracked by key â€“ skip
+                        _dbContext.Entry(existingTracked.Entity).CurrentValues.SetValues(entity);
                         continue;
                     }
                 }

@@ -1,4 +1,4 @@
-ï»¿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net8.0</TargetFrameworks>
@@ -17,7 +17,7 @@
 
 			1. This library can be run on any .NET Core or .NET application which has .NET 8.0+ support.
 
-			2. Itâ€™s providing the Generic Repository with database transaction support.
+			2. It’s providing the Generic Repository with database transaction support.
 
 			3. It has all the required methods to query your data in whatever way you want without getting IQueryable&lt;T&gt; from the repository.
 
@@ -38,7 +38,7 @@
 			11. Free raw SQL query support both for complex type and primitive types.
 		</Description>
 		<Title>EF Core Generic Repository</Title>
-		<Copyright>Â©2021 Aitron. All rights reserved.</Copyright>
+		<Copyright>©2021 Aitron. All rights reserved.</Copyright>
 		<PackageProjectUrl>https://github.com/aitron-uk/EFCore.GenericRepository</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/aitron-uk/EFCore.GenericRepository</RepositoryUrl>
 		<RepositoryType>Git</RepositoryType>
@@ -91,8 +91,13 @@
 		<UseLocalProjects Condition="'$(UseLocalProjects)' == ''">true</UseLocalProjects>
 	</PropertyGroup>
 
+	<ItemGroup Condition="'$(UseLocalProjects)' == 'true'">
+		<ProjectReference Include="..\Aitron.EFCore.QueryRepository\Hazelnut.EFCore.QueryRepository.csproj" />
+	</ItemGroup>
+
 	<ItemGroup Condition="'$(UseLocalProjects)' != 'true'">
 		<PackageReference Include="Hazelnut.EFCore.QueryRepository" Version="1.5.4" />
 	</ItemGroup>
 
 </Project>
+
